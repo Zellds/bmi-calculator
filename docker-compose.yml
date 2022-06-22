@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+
+  site:
+    image: bitnami/nginx:latest
+    container_name: site
+    volumes:
+      - ./app:/app
+      - ./docker/nginx/site.conf:/opt/bitnami/nginx/conf/server_blocks/proxy.conf
+    ports:
+      - 80:8080
+
+  phpfpm:
+    image: dumptec/php-fpm:8.1-dev
+    container_name: phpfpm
+    volumes: 
+      - ./app:/app
+    working_dir: /app
